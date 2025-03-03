@@ -11,6 +11,7 @@
 #include "command.h"
 
 int main() {
+	printf("%s", NAME_VER);
 	setenv("PATH", "/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin", 1);
 	for(;;) {
 		// Print shell prompt
