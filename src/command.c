@@ -11,6 +11,10 @@
 #include "builtins.h"
 
 int runcmd(char** args) {
+	// Check if command is NULL
+	if (args[0] == NULL)
+		return 0;
+
 	// Run built-ins
 	int builtins_stat = check_builtins(args);
 	if (builtins_stat == -1) {
@@ -29,9 +33,10 @@ int runcmd(char** args) {
 
 	} else if (cpid == 0) {
 	// In child process
-		char** pathdirs = tokenize(getenv("PATH"), ":");
+		size_t pathdir_c;
+		char** pathdirs = tokenize(getenv("PATH"), ":", &pathdir_c);
 		if (pathdirs != NULL) {
-			for (long unsigned int i = 0; i < (sizeof(pathdirs) / sizeof(char*)); i++) {
+			for (long unsigned int i = 0; i < pathdir_c; i++) {
 				char cmd[PATH_MAX];
 				snprintf(cmd, PATH_MAX, "%s/%s", pathdirs[i], args[0]);
 				execve(cmd, (char *const*) args, 0);

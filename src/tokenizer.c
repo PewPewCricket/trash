@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char** tokenize(char* buf, char* delim) {
+char** tokenize(char* buf, char* delim, size_t* token_count) {
 	// Copy string, strtok() is destructive so we don't want to destroy the original string.
 	char* s = strdup(buf);
 	if (s == NULL) {
@@ -9,7 +9,7 @@ char** tokenize(char* buf, char* delim) {
 	}
 	
 	// Get number of tokens
-	int count = 0;
+	size_t count = 0;
 	char* token = strtok(s, delim);
 	while (token != NULL) {
 		count++;
@@ -37,7 +37,7 @@ char** tokenize(char* buf, char* delim) {
 		tokens[count] = strdup(token);
 		if (tokens[count] == NULL) {
 			// Free all previously allocated tokens.
-			for (int i = 0; i < count; i++) {
+			for (size_t i = 0; i < count; i++) {
 				free(tokens[i]);
 			}
 			free(tokens);
@@ -50,6 +50,8 @@ char** tokenize(char* buf, char* delim) {
 
 	// Clean up.
 	tokens[count] = NULL;
+	if (token_count != NULL)
+		*token_count = count;
 	free(s);
 	return tokens;
 }

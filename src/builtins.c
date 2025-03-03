@@ -34,7 +34,7 @@ int check_builtins(char** args) {
 		exit(EXIT_SUCCESS);
 
 	} else if (strchr(args[0], '=') != NULL) {
-		char** tokens = tokenize(trim_spaces(args[0]), "=");
+		char** tokens = tokenize(trim_spaces(args[0]), "=", NULL);
 		if (tokens == NULL)
 			return -1;
 		setenv(tokens[0], tokens[1], true);

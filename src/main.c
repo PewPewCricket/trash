@@ -25,13 +25,13 @@ int main() {
 		if (fgets(cmd_buffer, sizeof(cmd_buffer), stdin) == NULL)
 			continue;
 		cmd_buffer[strcspn(cmd_buffer, "\n")] = 0;
-		char** args = tokenize(cmd_buffer, " ");
+		char** args = tokenize(cmd_buffer, " ", NULL);
 		if (args == NULL) {
 			perror(NAME_VER);
 		}	
 
 		// Execute command
-		if (runcmd(args) == -1) {
+		if (runcmd(args)) {
 			perror(NAME_VER);
 			free(args);
 		}
