@@ -120,12 +120,22 @@ int main(int argc, char** argv) {
       return EXIT_SUCCESS;
 
     } else if (!strcmp(tokens[0], "export")) {
+      if (tokens[1] == NULL) {
+        // todo: print env vars
+        free(tokens);
+        free(line);
+        continue;
+      }
+
       int pos = (int) (strstr(tokens[1], "=") - tokens[1]);
+      printf("set pos\n");
       if (pos == 0) {
         printf("%s: invalid syntax", PROGRAM_NAME_STRING);
       } else {
         char* env_var = malloc(pos);
+        printf("allocated memory\n");
         memcpy(env_var, tokens[1], pos);
+        printf("created substring\n");
         if (setenv(env_var, tokens[1] + pos, 1) != 0)
           perror(PROGRAM_NAME_STRING);
         free(env_var);
