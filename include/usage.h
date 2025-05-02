@@ -18,6 +18,8 @@
 #ifndef USAGE_H
 #define USAGE_H 1
 
+#include <version.h>
+
 char* usage_text =
   "trash: basic linux shell program\n"
   "Usage:\n"
@@ -25,5 +27,12 @@ char* usage_text =
   "Options:\n"
   "\t--help:        Print this help message.\n"
   "\t--version:     Print the current version.\n";
+
+char* version_text = 
+  "Trash, version " PROGRAM_VERSION_STRING "\n"
+  "Copyright (C) 2025 PewPewCricket\n"
+  "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n\n"
+  "This is free software; you are free to change and redistribute it.\n"
+  "There is NO WARRANTY, to the extent permitted by law.\n";
 
 #endif

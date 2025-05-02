@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
           printf("%s", usage_text);
           return EXIT_SUCCESS;
         } else if (!strcmp(long_opts[opt_idx].name, "version")) {
-          printf("%s %s\n", PROGRAM_NAME_STRING, PROGRAM_VERSION_STRING);
+          printf("%s", version_text);
           return EXIT_SUCCESS;
         }
         break;
